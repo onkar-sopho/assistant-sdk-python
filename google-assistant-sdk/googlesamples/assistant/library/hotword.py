@@ -66,6 +66,12 @@ def process_event(event):
     if event.type == EventType.ON_DEVICE_ACTION:
         for command, params in event.actions:
             print('Do command', command, 'with params', str(params))
+            if params['on']:
+                print('Turning the LED on.')
+                GPIO.output(25, 1)
+            else:
+                print('Turning the LED off.')
+                GPIO.output(25, 0)
 
 
 def main():
@@ -133,6 +139,8 @@ def main():
         device_id = assistant.device_id
         print('device_model_id:', device_model_id)
         print('device_id:', device_id + '\n')
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(25, GPIO.OUT, initial=GPIO.LOW)
 
         # Re-register if "device_id" is different from the last "device_id":
         if should_register or (device_id != last_device_id):

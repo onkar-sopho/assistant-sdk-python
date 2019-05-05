@@ -20,6 +20,7 @@ import argparse
 import json
 import os.path
 import pathlib2 as pathlib
+import RPi.GPIO as GPIO
 
 import google.oauth2.credentials
 
